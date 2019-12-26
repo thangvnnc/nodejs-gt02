@@ -1,12 +1,40 @@
 const net = require('net');
-const port = 2345;
-const host = '192.168.15.7';
-
+const PORT_TCP = process.env.PORT || 9999;
+const PORT_HTTP = process.env.PORT || 8888;
 const server = net.createServer();
-server.listen(port, host, () => {
-    console.log('TCP Server is running on port ' + port + '.');
+
+let express = require('express');
+let webApp = express();
+let bodyParser = require('body-parser');
+
+webApp.use(bodyParser.urlencoded({ extended: false }));
+webApp.use(bodyParser.json());
+
+var tcpIsRuning = false;
+
+webApp.listen(PORT_HTTP, function(err) {
+    if (err) {
+        writeLog(err);
+        return;
+    }
 });
 
+webApp.get('/port', function(req, res) {
+    let response = {
+        "tcp": PORT_TCP,
+        "http": PORT_HTTP,
+        "status_tcp": tcpIsRuning
+    }
+    res.send(response);
+})
+
+server.listen(PORT_TCP, function(err) {
+    if(err) {
+        tcpIsRuning = false;
+        return;
+    }
+    tcpIsRuning = true;
+});
 
 let sockets = [];
 
