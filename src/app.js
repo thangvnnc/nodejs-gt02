@@ -1,6 +1,6 @@
 const net = require('net');
 const PORT_TCP = process.env.PORT || 9999;
-const PORT_HTTP = process.env.PORT || 8888;
+// const PORT_HTTP = process.env.PORT || 8888;
 const server = net.createServer();
 
 let express = require('express');
@@ -10,39 +10,39 @@ let bodyParser = require('body-parser');
 webApp.use(bodyParser.urlencoded({ extended: false }));
 webApp.use(bodyParser.json());
 
-var tcpIsRuning = false;
+// var tcpIsRuning = false;
 
-webApp.listen(PORT_HTTP, function(err) {
-    if (err) {
-        writeLog(err);
-        return;
-    }
-});
+// webApp.listen(PORT_HTTP, function(err) {
+//     if (err) {
+//         writeLog(err);
+//         return;
+//     }
+// });
 
-webApp.get('/', function(req, res) {
-    let response = {
-        "tcp": PORT_TCP,
-        "http": PORT_HTTP,
-        "status_tcp": tcpIsRuning
-    }
-    res.send(response);
-})
+// webApp.get('/', function(req, res) {
+//     let response = {
+//         "tcp": PORT_TCP,
+//         "http": PORT_HTTP,
+//         "status_tcp": tcpIsRuning
+//     }
+//     res.send(response);
+// })
 
-webApp.get('/port', function(req, res) {
-    let response = {
-        "tcp": PORT_TCP,
-        "http": PORT_HTTP,
-        "status_tcp": tcpIsRuning
-    }
-    res.send(response);
-})
+// webApp.get('/port', function(req, res) {
+//     let response = {
+//         "tcp": PORT_TCP,
+//         "http": PORT_HTTP,
+//         "status_tcp": tcpIsRuning
+//     }
+//     res.send(response);
+// })
 
 server.listen(PORT_TCP, function(err) {
     if(err) {
-        tcpIsRuning = false;
+        // tcpIsRuning = false;
         return;
     }
-    tcpIsRuning = true;
+    // tcpIsRuning = true;
 });
 
 let sockets = [];
