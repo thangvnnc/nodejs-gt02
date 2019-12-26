@@ -37,13 +37,13 @@ webApp.get('/port', function(req, res) {
     res.send(response);
 })
 
-// server.listen(PORT_TCP, function(err) {
-//     if(err) {
-//         tcpIsRuning = false;
-//         return;
-//     }
-//     tcpIsRuning = true;
-// });
+server.listen(PORT_TCP, function(err) {
+    if(err) {
+        tcpIsRuning = false;
+        return;
+    }
+    tcpIsRuning = true;
+});
 
 let sockets = [];
 
