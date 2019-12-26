@@ -19,6 +19,15 @@ webApp.listen(PORT_HTTP, function(err) {
     }
 });
 
+webApp.get('/', function(req, res) {
+    let response = {
+        "tcp": PORT_TCP,
+        "http": PORT_HTTP,
+        "status_tcp": tcpIsRuning
+    }
+    res.send(response);
+})
+
 webApp.get('/port', function(req, res) {
     let response = {
         "tcp": PORT_TCP,
